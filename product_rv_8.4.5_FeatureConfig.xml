@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><TIBCOInstallerFeatures>
+    <productDef buildNumber="V6.1" buildType="release" id="rv" name="TIBCO Rendezvous 8.4.5" productMMName="shared" productMMVersion="1.0.0" productMachineModel="true" targetPlatform="linux/x86" universalinstallerrelease="3.4.2" universalinstallerversion="V1" version="8.4.5.000"/>
+
+    <featureconfigincludes>
+        
+        
+        
+        
+    </featureconfigincludes>
+
+    <customVariables>
+        <variable name="rv.version" value="8.4.5"/>
+        <variable name="rv.shortversion" value="8.4"/>
+        <variable name="rv.home" value="${tibco.home}${fsp}tibrv${fsp}${rv.shortversion}"/>
+        <variable name="TIBCO_RV_HOME" value="${tibco.home}${fsp}tibrv${fsp}${rv.shortversion}"/>
+    </customVariables>
+
+    <installerFeature installLocation="${rv.home}" name="Runtime" version="8.4.5" visible="true">
+        <assemblyList>
+            <assembly targetPlatform="linux/x86" uid="product_tibco_rv_32bit_runtime" version="8.4.5.001"/>
+            <assembly targetPlatform="linux/x86" uid="product_tibco_rv_64bit_runtime" version="8.4.5.001"/>
+            <assembly targetPlatform="linux/x86" uid="product_tibco_rv_runtime" version="8.4.5.001"/>
+            
+            
+            
+            <assembly targetPlatform="linux/x86" uid="product_tibco_ipm_32bit_runtime" version="8.4.5.006"/>
+            <assembly targetPlatform="linux/x86" uid="product_tibco_ipm_64bit_runtime" version="8.4.5.006"/>
+        </assemblyList>
+        
+        
+        <postInstallAction description="Pre Assembly Ref Installation Steps for RV Runtime files" sequence="pre-assembly-ref" target="pre-assembly-ref-rv_runtime" taskFile="${rv.home}/.uninstall/post-install.xml">
+            <postInstallActionProperty name="rv.home" value="${rv.home}"/>
+            <postInstallActionProperty name="systemroot" value="$E{SystemRoot}"/>
+        </postInstallAction>
+        
+        <postInstallAction description="Pre Uninstall Ref Installation Steps for RV Runtime files" sequence="pre-uninstall-ref" target="pre-uninstall-ref-rv_runtime" taskFile="${rv.home}/.uninstall/post-install.xml">
+            <postInstallActionProperty name="rv.home" value="${rv.home}"/>
+            <postInstallActionProperty name="systemroot" value="$E{SystemRoot}"/>
+        </postInstallAction>
+        
+        <postInstallAction description="Pre Assembly Ref Installation Steps for RV 64bit Runtime files" sequence="pre-assembly-ref" target="pre-assembly-ref-rv_64bit_runtime" taskFile="${rv.home}/.uninstall/post-install.xml">
+            <postInstallActionProperty name="rv.home" value="${rv.home}"/>
+        </postInstallAction>
+        
+        <postInstallAction description="Pre Assembly Ref Installation Steps for RV 32bit Runtime files" sequence="pre-assembly-ref" target="pre-assembly-ref-rv_32bit_runtime" taskFile="${rv.home}/.uninstall/post-install.xml">
+            <postInstallActionProperty name="rv.home" value="${rv.home}"/>
+        </postInstallAction>
+        <dependency description="TIBCO Rendezvous Feature" mustBeInstalled="false" parentID="rv" type="feature" uid="Required_rv" version="8.4.5"/>
+	
+    
+	
+    
+    </installerFeature>
+    <installerFeature installLocation="${rv.home}" name="Required" version="8.4.5" visible="false">
+        <assemblyList>
+            <assembly uid="product_tibco_rv_common" version="8.4.5.001"/>
+        </assemblyList>
+    </installerFeature>
+    <installerFeature installLocation="${rv.home}" name="Development" version="8.4.5" visible="true">
+        <assemblyList>
+            <assembly targetPlatform="linux/x86" uid="product_tibco_rv_32bit_development" version="8.4.5.001"/>
+            <assembly targetPlatform="linux/x86" uid="product_tibco_rv_64bit_development" version="8.4.5.001"/>
+            <assembly uid="product_tibco_rv_development" version="8.4.5.001"/>
+            <assembly targetPlatform="linux/x86" uid="product_tibco_ipm_32bit_development" version="8.4.5.006"/>
+            <assembly targetPlatform="linux/x86" uid="product_tibco_ipm_64bit_development" version="8.4.5.006"/>
+        </assemblyList>
+        <dependency description="TIBCO Rendezvous Runtime Feature" mustBeInstalled="false" parentID="rv" type="feature" uid="Runtime_rv" version="8.4.5"/>
+    </installerFeature>
+    <installerFeature installLocation="${rv.home}" name="Source" version="8.4.5" visible="true">
+        <assemblyList>
+            <assembly uid="product_tibco_rv_source_common" version="8.4.5.001"/>
+            
+            <assembly uid="product_tibco_ipm_source_common" version="8.4.5.006"/>
+        </assemblyList>
+        <dependency description="TIBCO Rendezvous Development Feature" mustBeInstalled="false" parentID="rv" type="feature" uid="Development_rv" version="8.4.5"/>
+    </installerFeature>
+    <installerFeature installLocation="${rv.home}" name="RVDM" version="8.4.5" visible="true">
+        <assemblyList>
+            <assembly uid="product_tibco_rvdm" version="8.4.5.001"/>
+        </assemblyList>
+        <dependency description="TIBCO Rendezvous Runtime Feature" mustBeInstalled="false" parentID="rv" type="feature" uid="Runtime_rv" version="8.4.5"/>
+    </installerFeature>
+    <customSettings machineModel="false" multipleEnvironmentSupport="true"/>
+</TIBCOInstallerFeatures>
